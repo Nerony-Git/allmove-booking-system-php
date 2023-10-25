@@ -5,7 +5,20 @@ if (isset($_SESSION[''])) {
     die();
 }
 
-include("config.php");
+include("assets/connection/config.php");
+
+// Function to generate verification code
+function genVerification()
+{
+    return mt_rand(100000, 999999);
+}
+
+// Function to send verification code
+
+
+// Handle Login submission
+
+
 $msg = "";
 
 ?>
