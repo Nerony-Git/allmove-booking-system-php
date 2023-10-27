@@ -25,7 +25,7 @@ if (isset($_GET['accesscheck'])) {
 if (isset($_POST['submit'])) {
     $loginUsername = $_POST['username'];
     $MM_fldUserAuthorization = "";
-    $MM_redirectLoginSuccess = "verification.php";
+    $MM_redirectLoginSuccess = "dashboard.php";
     $MM_redirectLoginFailed = "index.php";
     $MM_redirecttoReferrer = false;
 
@@ -79,23 +79,29 @@ $msg = "";
         <div class="forms-container">
             <div class="login">
                 <form action="" method="POST" class="login-form">
-                    <h2 class="title">Login</h2>
-                    <!-- [ Echo Msg] -->
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="text" name="username" placeholder="Username" />
+                    <h2 class="title">Verify Login</h2>
+                    <br />
+                    <br />
+                    <br />
+
+                    <h3>Provide OTP.</h3>
+                    <p><small><i class="fas fa-info-circle"></i> &nbsp; Check your email for the OTP</small></p>
+                    <br />
+
+                    <div class="input-otp" id="otp">
+                        <input type="text" maxlength="1" oninput="moveToNextInput(1)" /> &nbsp;
+                        <input type="text" maxlength="1" oninput="moveToNextInput(2)" /> &nbsp;
+                        <input type="text" maxlength="1" oninput="moveToNextInput(3)" />
+                        <h2> &nbsp; _ &nbsp;</h2>
+                        <input type="text" maxlength="1" oninput="moveToNextInput(4)" /> &nbsp;
+                        <input type="text" maxlength="1" oninput="moveToNextInput(5)" /> &nbsp;
+                        <input type="text" maxlength="1" oninput="moveToNextInput(6)" />
                     </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" name="password" placeholder="Password" />
-                    </div>
-                    <div class="Forget-Pass">
-                        <a href="#" class="Forget">Forgot Password?</a>
-                    </div>
+                    <br />
 
                     <div class="input-btn">
                         <i class="fas fa-sign-in-alt"></i>
-                        <input type="submit" name="submit" value="Login" />
+                        <input type="submit" name="submit" value="Verify" />
                     </div>
                 </form>
             </div>
@@ -114,6 +120,30 @@ $msg = "";
     <!-- [ Foot Link Start ] -->
     <?php include('layout/foot/foot-login.php') ?>
     <!-- [ Foot Link End ] -->
+
+    <!-- [ Script Start] -->
+    <script>
+        function moveToNextInput(currentIndex) {
+            const nextIndex = currentIndex + 1;
+            const prevIndex = currentIndex - 1;
+
+            // If the user pressed backspace, focus on the previous input
+            if (event.inputType === 'deleteContentBackward' && prevIndex >= 1) {
+                const prevInput = document.querySelector(`.otp-input input:nth-child(${prevIndex})`);
+                if (prevInput) {
+                    prevInput.focus();
+                    return;
+                }
+            }
+
+            // If the user pressed any other key, focus on the next input
+            const nextInput = document.querySelector(`.otp-input input:nth-child(${nextIndex})`);
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    </script>
+    <!-- [ Script End] -->
 
 </body>
 
